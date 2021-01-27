@@ -1,18 +1,30 @@
 'use strict';
 (function() {
 
-	
+	// the "Factor" button
+	var button = document.querySelector('#factor-button');
+
+	// the input area where user types their number
+	var input = document.querySelector('#number');
+
+	// the <div> where we'll put our response
+	var responseDiv = document.querySelector('#response');
+
 	var answerDiv = responseDiv.querySelector('#answer');
 	var solutionDiv = responseDiv.querySelector('#solution');
 
-	
+	// onclick event for the Factor button
+	button.addEventListener( 'click', function() {
+		
 		var factorer = new Factorer( input.value );
 		factorer.run();
 		factorer.report();
 		
 	} );
 
-	
+	/**
+	 * Factors integers into primes and displays the result to the document
+	 */
 	function Factorer( n ) {
 
 		var factorer = this;
@@ -23,7 +35,9 @@
 			this.n = 0;
 		}
 
-	
+		// minimal list of all numbers to check to find the factorization
+		this.numbersToCheck = null;
+
 		this.workingNumber = this.n;
 
 		this.factors = [];
@@ -31,6 +45,18 @@
 
 		this.isPrime = false;
 
+		// response(s) to 
+		this.response = [];
+
+		/**
+		 * Main routine to factor the number
+		 */
+		this.run = function() {
+
+			// make sure we have a valid number
+			if( this.n < 2 ) {
+				return;
+			}
 
 			this.response.push( 'Factoring ' + this.n + '...' );
 
@@ -38,7 +64,9 @@
 			this.checkNumbers();
 		}
 
-	
+		/**
+		 * Get the minimal list of all numbers to check to find the factorization
+		 */
 		this.getNumbersToCheck = function() {
 
 			if( null !== this.numbersToCheck ) {
