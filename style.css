@@ -1,0 +1,12 @@
+.success {
+	color: green;
+}
+.fail {
+	color: red;
+}
+#answer .success {
+	font-size: 2em;
+}
+#number-to-factor input{
+	margin-top: 0.5em;
+}
